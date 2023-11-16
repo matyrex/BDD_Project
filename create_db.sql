@@ -122,8 +122,8 @@ CREATE SEQUENCE seq_test_result START WITH 1;
 
 CREATE TABLE Test_Result (
   id_test_result INT DEFAULT seq_test_result.NEXTVAL PRIMARY KEY,
-  log BLOB NOT NULL,
-  test_state VARCHAR2(50)
+  test_result_log BLOB,
+  test_state VARCHAR2(50) NOT NULL
 );
 
 CREATE TABLE Mission (
