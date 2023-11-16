@@ -9,9 +9,9 @@ FROM Client_Action
 WHERE id_action IN (SELECT FK_action FROM Recomendation_Action WHERE FK_recomendation IN (SELECT FK_recomendation FROM Test WHERE FK_report = 1));
 
 -- Select all reports with all information about the employe and his company
-SELECT R.*, C.name_company, E.employe_first_name, E.employe_last_name
+SELECT R.*, C.company_name, E.employe_first_name, E.employe_last_name
 FROM Report R
-JOIN Mission M ON R.FK_report = M.FK_report
+JOIN Mission M ON R.id_report = M.FK_report
 JOIN Company C ON M.FK_company = C.id_company
 JOIN Employe E ON M.FK_contact = E.id_employe;
 
@@ -35,10 +35,10 @@ WHERE Test.FK_report = 1;
 -- Select all the reports with associated employes and their recomended actions
 SELECT R.*, E.employe_first_name, E.employe_last_name, CA.action
 FROM Report R
-JOIN Mission M ON R.FK_report = M.FK_report
+JOIN Mission M ON R.id_report = M.FK_report
 JOIN Employe E ON M.FK_contact = E.id_employe
-LEFT JOIN Test T ON R.id_rap = T.FK_report
-LEFT JOIN Recomendation_Action RA ON T.FK_recomendation = RA.FK_reco
+LEFT JOIN Test T ON R.id_report = T.FK_report
+LEFT JOIN Recomendation_Action RA ON T.FK_recomendation = RA.FK_recomendation
 LEFT JOIN Client_Action CA ON RA.FK_action = CA.id_action;
 
 -- Select all the reports with recomendations who has difficulty type 1
